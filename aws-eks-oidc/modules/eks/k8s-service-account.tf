@@ -11,7 +11,7 @@ data "aws_eks_cluster" "cluster" {
 data "aws_eks_cluster_auth" "cluster" {
   name = aws_eks_cluster.dtg.name
 }
-# Configure OIDC Provider in AWS
+# # Create an OIDC provider for the EKS cluster
 resource "aws_iam_openid_connect_provider" "eks_oidc" {
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = [data.aws_eks_cluster.cluster.identity[0].oidc[0].issuer]
