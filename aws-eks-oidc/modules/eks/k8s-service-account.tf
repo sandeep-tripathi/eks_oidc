@@ -17,7 +17,7 @@ resource "aws_iam_openid_connect_provider" "eks_oidc" {
   thumbprint_list = [data.aws_eks_cluster.cluster.identity[0].oidc[0].issuer]
   url             = data.aws_eks_cluster.cluster.identity[0].oidc[0].issuer
 }
-# IAM Role for Service Accounts (IRSA)
+# # Create an IAM role for the Kubernetes Service Account (IRSA)
 resource "aws_iam_role" "sa_role" {
   name = "${var.cluster_name}-sa-role"
 
@@ -39,12 +39,12 @@ resource "aws_iam_role" "sa_role" {
     ]
   })
 }
-#
+## Attach a policy to the IAM role (e.g., S3 ReadOnly access)
 resource "aws_iam_role_policy_attachment" "sa_policy_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
   role       = aws_iam_role.sa_role.name
 }
-#  Create the Kubernetes Service Account
+#  Create the Kubernetes Service Account with the IAM role annotation
 resource "kubernetes_service_account" "sa" {
   metadata {
     name      = var.service_account_name
