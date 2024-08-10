@@ -1,3 +1,6 @@
+## Medium article:
+ https://medium.com/@sandeepp.tripathi/aws-eks-authentication-with-microsoft-entra-id-using-terraform-1a2f43fd34e7
+ 
 ## Terraform code to deploy an AWS EKS cluster with OIDC authentication using Azure Entra ID.
 ## Folder structure
 ![image](https://github.com/user-attachments/assets/ee4c5898-1280-45ed-beef-65e57ea963e4)
