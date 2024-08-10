@@ -4,12 +4,17 @@
 
 
 
-## Usage: Example for dev environement: cd env/dev/
+## Usage: Example for dev environement:
+Go to the folder for the environemtn you want to deploy in, eg **dev** environement
 1. Initialize the environment:
+   ```bash
+    cd env/dev/
+   ```
+2. Initialize the environment:
    ```bash
    terraform init && terraform plan
    ```
-2. Apply the Terraform code:
+3. Apply the Terraform code:
    ```bash
    terraform apply
    ```
