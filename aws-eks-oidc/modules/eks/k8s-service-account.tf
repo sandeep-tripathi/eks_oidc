@@ -1,3 +1,4 @@
+# Defines the Kubernetes Service Account and links it to an IAM role using IRSA.
 ##Creating service account
 ## Enabling EKS OIDC provider
 ## Creating  IAM Role for Service Accounts (IRSA)
