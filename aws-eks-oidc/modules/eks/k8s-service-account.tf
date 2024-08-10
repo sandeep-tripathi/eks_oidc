@@ -3,7 +3,7 @@
 ## Enabling EKS OIDC provider
 ## Creating  IAM Role for Service Accounts (IRSA)
 #####################################
-# Ensure the EKS OIDC provider is enabled
+# # Retrieve EKS cluster details
 data "aws_eks_cluster" "cluster" {
   name = aws_eks_cluster.dtg.name
 }
