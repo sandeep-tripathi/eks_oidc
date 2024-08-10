@@ -23,7 +23,7 @@ variable "subnet_ids" {
 variable "namespace" {
   description = "The Kubernetes namespace where the service account will be created"
   type        = string
-  default     = "default"
+  default     =  "oidc_eks"
 }
 
 variable "service_account_name" {
