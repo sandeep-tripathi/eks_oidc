@@ -60,7 +60,7 @@ variable "s3_key" {
   description = "The key for the Terraform state file in the S3 bucket"
   type        = string
 }
-
+# Name of the DynamoDB table used for state locking.
 variable "dynamodb_table" {
   description = "The name of the DynamoDB table for state locking"
   type        = string
