@@ -8,7 +8,7 @@
 Go to the folder for the environemtn you want to deploy in, eg **dev** environement
 1. Initialize the environment:
    ```bash
-    cd env/dev/
+    cd aws-eks-oidc/env/dev/
    ```
 2. Initialize the environment:
    ```bash
