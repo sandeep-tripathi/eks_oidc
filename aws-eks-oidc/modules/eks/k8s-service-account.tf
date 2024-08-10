@@ -1,0 +1,51 @@
+# Ensure the EKS OIDC provider is enabled
+data "aws_eks_cluster" "cluster" {
+  name = aws_eks_cluster.dtg.name
+}
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = aws_eks_cluster.dtg.name
+}
+
+resource "aws_iam_openid_connect_provider" "eks_oidc" {
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = [data.aws_eks_cluster.cluster.identity[0].oidc[0].issuer]
+  url             = data.aws_eks_cluster.cluster.identity[0].oidc[0].issuer
+}
+
+resource "aws_iam_role" "sa_role" {
+  name = "${var.cluster_name}-sa-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = {
+          Federated = aws_iam_openid_connect_provider.eks_oidc.arn
+        }
+        Action = "sts:AssumeRoleWithWebIdentity"
+        Condition = {
+          StringEquals = {
+            "eks.amazonaws.com:sub" = "system:serviceaccount:${var.namespace}:${var.service_account_name}"
+          }
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "sa_policy_attachment" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+  role       = aws_iam_role.sa_role.name
+}
+
+resource "kubernetes_service_account" "sa" {
+  metadata {
+    name      = var.service_account_name
+    namespace = var.namespace
+    annotations = {
+      "eks.amazonaws.com/role-arn" = aws_iam_role.sa_role.arn
+    }
+  }
+}
