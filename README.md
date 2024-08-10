@@ -4,10 +4,10 @@
 
 
 
-## Usage
+## Usage: Example for dev environement: cd env/dev/
 1. Initialize the environment:
    ```bash
-   terraform init && terraform validate
+   terraform init && terraform plan
    ```
 2. Apply the Terraform code:
    ```bash
