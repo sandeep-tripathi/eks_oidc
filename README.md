@@ -6,7 +6,7 @@
 
 ## Usage: Example for dev environement:
 Go to the folder for the environemtn you want to deploy in, eg **dev** environement
-1. Initialize the environment:
+1. Path for the dev environment:
    ```bash
     cd aws-eks-oidc/env/dev/
    ```
